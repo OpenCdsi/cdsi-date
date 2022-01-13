@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Cdsi.UnitTests
+namespace UnitTests
 {
     [TestClass]
     public class ParserTests
