@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Duration;
+﻿using System.Text.RegularExpressions;
 
-namespace Duration
+namespace DateMath
 {
-    public class Parser
+    public partial class Duration
     {
         private static Regex re = new Regex("^([\\+-]?\\d+)(\\w+)");
 
-        private static Interval ParseUnit(string text)
+        internal static Interval ParseUnit(string text)
         {
             text = text.ToLower();
             return (text.First()) switch
@@ -23,7 +19,7 @@ namespace Duration
             };
         }
 
-        public static IDuration Parse(string text)
+        internal static Duration ParseOne(string text)
         {
             text = text.Replace(" ", "");
             var match = re.Match(text);
@@ -41,13 +37,13 @@ namespace Duration
             }
         }
 
-        public static IEnumerable<IDuration> ParseAll(string text)
+        public static IEnumerable<Duration> Parse(string text)
         {
-            var durations = new List<IDuration>();
+            var durations = new List<Duration>();
             text = text.Replace(" ", "");
             while (!string.IsNullOrEmpty(text))
             {
-                durations.Add(Parse(text));
+                durations.Add(ParseOne(text));
                 text = re.Replace(text, "");
             }
             return durations;

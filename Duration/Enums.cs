@@ -1,4 +1,4 @@
-﻿namespace Duration
+﻿namespace DateMath
 {
     public enum Interval
     {

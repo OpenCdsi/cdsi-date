@@ -1,9 +1,6 @@
-﻿using System;
-using Common;
-
-namespace Duration
+﻿namespace DateMath
 {
-    public class DurationOperators
+    public partial class Duration : IDuration
     {
         // DateTime helpers
         internal static DateTime Add(DateTime date, IDuration interval)
@@ -40,7 +37,7 @@ namespace Duration
         {
             if (a.Unit != b.Unit) throw new ArgumentException("Both intervals must have the same Unit.");
 
-            return new Duration { Value = aValue + bValue, Unit = a.Unit };
+            return new Duration { Value = a.Value + b.Value, Unit = a.Unit };
         }
         public static Duration operator -(Duration a, Duration b)
         {
@@ -68,15 +65,15 @@ namespace Duration
         // Duration:Integer
         public static Duration operator +(int a, Duration b)
         {
-            return new Duration { Duration = bValue + a, Unit = b.Unit };
+            return new Duration { Value = b.Value + a, Unit = b.Unit };
         }
         public static Duration operator -(int a, Duration b)
         {
-            return new Duration { Duration = bValue - a, Unit = b.Unit };
+            return new Duration { Value = b.Value - a, Unit = b.Unit };
         }
         public static Duration operator *(int a, Duration b)
         {
-            return new Duration { Duration = a * bValue, Unit = b.Unit };
+            return new Duration { Value = a * b.Value, Unit = b.Unit };
         }
 
 
