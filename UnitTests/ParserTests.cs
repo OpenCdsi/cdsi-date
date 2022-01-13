@@ -17,7 +17,7 @@ namespace DateMath.UnitTests
         [TestMethod]
         public void CanParseAnIntervalWithJunkText()
         {
-            var text = "6 years plus some  bogus data";
+            var text = "6 years plus some junk text";
             var duration = Duration.Parse(text).First();
             Assert.AreEqual(6, duration.Value);
             Assert.AreEqual(Interval.Year, duration.Unit);
