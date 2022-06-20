@@ -1,4 +1,4 @@
-﻿namespace DateMath
+﻿namespace Cdsi
 {
 
     public interface IDuration

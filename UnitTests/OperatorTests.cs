@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using DateMath;
+using Cdsi;
 
 namespace DateMath.UnitTests
 {
