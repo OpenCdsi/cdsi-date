@@ -14,14 +14,6 @@
                 _ => throw new ArgumentException()
             };
         }
-        internal static DateTime Add(DateTime date, IEnumerable<IDuration> intervals)
-        {
-            foreach (var interval in intervals)
-            {
-                date = Add(date, interval);
-            }
-            return date;
-        }
 
         internal static DateTime CALCDT_5(DateTime date, int duration)
         {
@@ -51,7 +43,7 @@
 
         public static Duration operator -(Duration a, Duration b)
         {
-            return a + (-1 * b);
+            return a + (b * -1);
         }
 
         // Duration:DateTime
@@ -61,37 +53,33 @@
         }
         public static DateTime operator -(DateTime a, Duration b)
         {
-            return Add(a, -1 * b);
-        }
-        public static DateTime operator +(Duration b, DateTime a)
-        {
-            return a + b;
+            return Add(a, b * -1);
         }
 
         // Duration:Integer
-        public static Duration operator +(int a, Duration b)
+        public static Duration operator +(Duration a, int b)
         {
-            return new Duration { Value = b.Value + a, Unit = b.Unit };
+            return new Duration { Value = a.Value + b, Unit = a.Unit };
         }
-        public static Duration operator -(int a, Duration b)
+        public static Duration operator -(Duration a, int b)
         {
-            return new Duration { Value = b.Value - a, Unit = b.Unit };
+            return new Duration { Value = a.Value - b, Unit = a.Unit };
         }
-        public static Duration operator *(int a, Duration b)
+        public static Duration operator *(Duration a, int b)
         {
-            return new Duration { Value = a * b.Value, Unit = b.Unit };
+            return new Duration { Value = a.Value * b, Unit = a.Unit };
+        }
+        public static Duration operator /(Duration a, int b)
+        {
+            return new Duration { Value = a.Value / b, Unit = a.Unit };
         }
 
-
-        public static Duration operator +(Duration b, int a)
+        // Duration:Integer (associative operations)
+        public static Duration operator +(int b, Duration a)
         {
             return a + b;
         }
-        public static Duration operator -(Duration b, int a)
-        {
-            return a - b;
-        }
-        public static Duration operator *(Duration b, int a)
+        public static Duration operator *(int b, Duration a)
         {
             return a * b;
         }
