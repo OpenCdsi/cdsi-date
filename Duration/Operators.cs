@@ -14,6 +14,15 @@
                 _ => throw new ArgumentException()
             };
         }
+        internal static DateTime Add(DateTime date, IEnumerable<IDuration> intervals)
+        {
+            foreach (var interval in intervals)
+            {
+                date = Add(date, interval);
+            }
+            return date;
+        }
+
         internal static DateTime CALCDT_5(DateTime date, int duration)
         {
             try
@@ -39,6 +48,7 @@
 
             return new Duration { Value = a.Value + b.Value, Unit = a.Unit };
         }
+
         public static Duration operator -(Duration a, Duration b)
         {
             return a + (-1 * b);
@@ -56,10 +66,6 @@
         public static DateTime operator +(Duration b, DateTime a)
         {
             return a + b;
-        }
-        public static DateTime operator -(Duration b, DateTime a)
-        {
-            return a - b;
         }
 
         // Duration:Integer
