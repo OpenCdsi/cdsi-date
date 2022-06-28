@@ -6,7 +6,7 @@
         public int Value { get; internal set; }
         public Interval Unit { get; internal set; }
 
-        public static IDuration Create(int value, Interval unit)
+        public static Duration Create(int value, Interval unit)
         {
             return new Duration { Value = value, Unit = unit };
         }
