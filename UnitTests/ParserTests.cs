@@ -2,7 +2,7 @@
 using System.Linq;
 using Cdsi;
 
-namespace DateMath.UnitTests
+namespace Cdsi.CalcDt.Tests
 {
     [TestClass]
     public class ParserTests
@@ -11,26 +11,26 @@ namespace DateMath.UnitTests
         public void CanParseAnInterval()
         {
             var text = "6 years";
-            var duration = Duration.Parse(text).First();
-            Assert.AreEqual(6, duration.Value);
-            Assert.AreEqual(Interval.Year, duration.Unit);
+            var interval = Interval.Parse(text);
+            Assert.AreEqual(6, interval.Value);
+            Assert.AreEqual(IntervalUnit.Year, interval.Unit);
         }
         [TestMethod]
         public void CanParseAnIntervalWithJunkText()
         {
             var text = "6 years plus some junk text";
-            var duration = Duration.Parse(text).First();
-            Assert.AreEqual(6, duration.Value);
-            Assert.AreEqual(Interval.Year, duration.Unit);
+            var interval = Interval.Parse(text);
+            Assert.AreEqual(6, interval.Value);
+            Assert.AreEqual(IntervalUnit.Year, interval.Unit);
         }
 
         [TestMethod]
         public void CanParseMultipleIntervals()
         {
             var text = "6 years - 4 days";
-            var intervals = Duration.Parse(text);
+            var intervals = Interval.ParseMany(text);
             Assert.AreEqual(6, intervals.First().Value);
-            Assert.AreEqual(Interval.Day, intervals.ElementAt(1).Unit);
+            Assert.AreEqual(IntervalUnit.Day, intervals.ElementAt(1).Unit);
         }
     }
 }

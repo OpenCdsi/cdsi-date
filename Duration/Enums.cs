@@ -1,6 +1,5 @@
 ﻿namespace Cdsi
-{
-    public enum Interval
+{    public enum IntervalUnit
     {
         Day,
         Week,
@@ -8,4 +7,4 @@
         Year
     }
 }
-    
+   

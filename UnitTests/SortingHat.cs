@@ -9,31 +9,29 @@ namespace Cdsi.CalcDt.Tests
     [TestClass]
     public class SortingTests
     {
-        internal List<IDuration> SameUnitList()
+        internal List<Interval> SameUnitList()
         {
-            return new List<IDuration> { Duration.Create(12, Interval.Year), Duration.Create(1, Interval.Year) };
+            return new List<Interval> { Interval.Year * 12, Interval.Year };
         }
-        internal List<IDuration> DifferentUnitList()
+        internal List<Interval> DifferentUnitList()
         {
-            return new List<IDuration> { Duration.Create(12, Interval.Year), Duration.Create(1, Interval.Week) };
+            return new List<Interval> { Interval.Year, Interval.Week };
         }
 
         [TestMethod]
         public void SortYears()
         {
-            var durations = SameUnitList();
-            var smallest = durations.Last();
-            durations.Sort(new DurationComparer());
-            Assert.AreEqual(smallest, durations.First());
+            var Intervals = SameUnitList();
+            Intervals.Sort(new IntervalComparer());
+            Assert.AreEqual(Interval.Year, Intervals.First());
         }
 
         [TestMethod]
-        public void SortDurations()
+        public void SortIntervals()
         {
-            var durations = DifferentUnitList();
-            var smallest = durations.Last();
-            durations.Sort(new DurationComparer());
-            Assert.AreEqual(smallest, durations.First());
+            var Intervals = DifferentUnitList();
+            Intervals.Sort(new IntervalComparer());
+            Assert.AreEqual(Interval.Week, Intervals.First());
         }
     }
 }

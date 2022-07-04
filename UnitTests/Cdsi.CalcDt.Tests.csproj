@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Duration\Cdsi.Duration.csproj" />
+    <ProjectReference Include="..\Duration\Cdsi.CalcDt.csproj" />
   </ItemGroup>
 
 </Project>
