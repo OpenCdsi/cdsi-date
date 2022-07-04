@@ -14,6 +14,8 @@ namespace Cdsi
 
         public static Interval Parse(string str)
         {
+            if(string.IsNullOrEmpty(str)) return Interval.Empty;
+
             str = str.Replace(" ", "");
             var match = re.Match(str);
             if (match.Success)

@@ -32,6 +32,14 @@ namespace Cdsi.CalcDt.Tests
             Assert.AreEqual(6, intervals.First().Value);
             Assert.AreEqual(IntervalUnit.Day, intervals.ElementAt(1).Unit);
         }
+
+        [TestMethod]
+        public void ParseNullStringIsEmpty()
+        {
+            var text = "";
+            var interval = Interval.Parse(text);
+            Assert.AreEqual(Interval.Empty, interval);
+        }
     }
 }
 
