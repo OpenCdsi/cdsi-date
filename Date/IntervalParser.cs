@@ -14,13 +14,13 @@ namespace Cdsi
 
         public static Interval Parse(string str)
         {
-            if(string.IsNullOrEmpty(str)) return Interval.Empty;
+            if (string.IsNullOrWhiteSpace(str)) return Interval.Empty;
 
             str = str.Replace(" ", "");
             var match = re.Match(str);
             if (match.Success)
             {
-                return new ()
+                return new()
                 {
                     Value = int.Parse(match.Groups[1].Value),
                     Unit = ParseUnit(match.Groups[2].Value)
@@ -46,6 +46,13 @@ namespace Cdsi
         public static IEnumerable<Interval> ParseMany(string str)
         {
             var intervals = new List<Interval>();
+
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                intervals.Add(Interval.Empty);
+                return intervals;
+            }
+
             str = str.Replace(" ", "");
             while (!string.IsNullOrEmpty(str))
             {

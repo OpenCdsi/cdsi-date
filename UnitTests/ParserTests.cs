@@ -40,6 +40,14 @@ namespace Cdsi.CalcDt.Tests
             var interval = Interval.Parse(text);
             Assert.AreEqual(Interval.Empty, interval);
         }
+
+        [TestMethod]
+        public void ParseManyNullStringIsEmpty()
+        {
+            var text = "";
+            var intervals = Interval.ParseMany(text);
+            Assert.AreEqual(Interval.Empty, intervals.First());
+        }
     }
 }
 
