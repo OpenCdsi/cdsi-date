@@ -37,8 +37,8 @@ namespace Cdsi.CalcDt.Tests
         public void ParseNullStringIsEmpty()
         {
             var text = "";
-            var interval = Interval.Parse(text);
-            Assert.AreEqual(Interval.Empty, interval);
+            var interval = Interval.ParseOrDefault(text);
+            Assert.AreEqual(Interval.Min, interval);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var text = "";
             var intervals = Interval.ParseMany(text);
-            Assert.AreEqual(Interval.Empty, intervals.First());
+            Assert.AreEqual(Interval.Min, intervals.First());
         }
     }
 }

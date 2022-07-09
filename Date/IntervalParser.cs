@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Cdsi.Date;
 
 namespace Cdsi
 {
@@ -14,8 +15,6 @@ namespace Cdsi
 
         public static Interval Parse(string str)
         {
-            if (string.IsNullOrWhiteSpace(str)) return Interval.Empty;
-
             str = str.Replace(" ", "");
             var match = re.Match(str);
             if (match.Success)
@@ -49,7 +48,7 @@ namespace Cdsi
 
             if (string.IsNullOrWhiteSpace(str))
             {
-                intervals.Add(Interval.Empty);
+                intervals.Add(Interval.Min);
                 return intervals;
             }
 
@@ -60,6 +59,17 @@ namespace Cdsi
                 str = re.Replace(str, "");
             }
             return intervals;
+        }
+        public static Interval ParseOrDefault(string str, Interval defaultValue=default)
+        {
+            try
+            {
+                return Parse(str);
+            }
+            catch(ArgumentException)
+            {
+                return defaultValue;
+            }
         }
     }
 }
