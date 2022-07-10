@@ -60,15 +60,17 @@ namespace Cdsi
             }
             return intervals;
         }
-        public static Interval ParseOrDefault(string str, Interval defaultValue=default)
+        public static bool TryParse(string str, out Interval result)
         {
             try
             {
-                return Parse(str);
+                result = Parse(str);
+                return true;
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
-                return defaultValue;
+                result = default;
+                return false;
             }
         }
     }

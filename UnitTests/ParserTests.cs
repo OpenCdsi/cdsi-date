@@ -37,7 +37,7 @@ namespace Cdsi.CalcDt.Tests
         public void ParseNullStringIsEmpty()
         {
             var text = "";
-            var interval = Interval.ParseOrDefault(text);
+            Interval.TryParse(text, out var interval);
             Assert.AreEqual(Interval.Min, interval);
         }
 
