@@ -19,7 +19,7 @@ namespace Cdsi.Date
 
             } while (!string.IsNullOrEmpty(text));
 
-            values.Sort(new IntervalComparer());
+            values.Sort(new IntervalUnitComparer());
 
             return new Duration()
             {

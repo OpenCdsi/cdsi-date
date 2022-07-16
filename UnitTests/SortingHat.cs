@@ -21,17 +21,17 @@ namespace Cdsi.CalcDt.Tests
         [TestMethod]
         public void SortYears()
         {
-            var Intervals = SameUnitList();
-            Intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(1, Intervals.First().Value);
+            var intervals = SameUnitList();
+            intervals.Sort(new IntervalComparer());
+            Assert.AreEqual(Defaults.Year, intervals.First());
         }
 
         [TestMethod]
         public void SortIntervals()
         {
-            var Intervals = DifferentUnitList();
-            Intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(IntervalUnit.Year, Intervals.First().Unit);
+            var intervals = DifferentUnitList();
+            intervals.Sort(new IntervalComparer());
+            Assert.AreEqual(Defaults.Week, intervals.First());
         }
     }
 }

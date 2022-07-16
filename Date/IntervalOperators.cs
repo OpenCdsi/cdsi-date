@@ -24,7 +24,7 @@
         // DateTime:Interval
         public static DateTime operator +(DateTime a, Interval b)
         {
-            return a.Add(b).Clamp();
+            return a.Add(b);
         }
         public static DateTime operator -(DateTime a, Interval b)
         {

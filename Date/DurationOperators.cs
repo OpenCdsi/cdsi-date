@@ -51,7 +51,7 @@ namespace Cdsi.Date
         // DateTime:Duration
         public static DateTime operator +(DateTime a, Duration b)
         {
-            return a.Add(b.Values).Clamp();
+            return a.Add(b.Values);
         }
 
         public static DateTime operator +(Duration b, DateTime a)

@@ -48,15 +48,5 @@
             }
             return date;
         }
-
-        public static DateTime Clamp(this DateTime date)
-        {
-            if (date < MinDate.Value)
-                return MinDate.Value;
-            else if (date > MaxDate.Value)
-                return MaxDate.Value;
-            else
-                return date;
-        }
     }
 }

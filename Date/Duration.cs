@@ -15,13 +15,24 @@ namespace Cdsi.Date
 
         public bool Equals(Duration x, Duration y)
         {
-            return x.Values.Length == y.Values.Length 
-                && x.Values.Zip(y.Values).All(xy => xy.First.Equals(xy.Second));
+            var a = MaxDate.Value + x;
+            var b = MaxDate.Value + y;
+            return a.Equals(b);
         }
 
         public int GetHashCode([DisallowNull] Duration obj)
         {
-            return obj.Values.GetHashCode();
+            return obj.GetHashCode();
+        }
+    }
+
+    public class DurationComparer : IComparer<Duration>
+    {
+        public int Compare(Duration x, Duration y)
+        {
+            var a = MaxDate.Value + x;
+            var b = MaxDate.Value + y;
+            return a.CompareTo(b);
         }
     }
 }

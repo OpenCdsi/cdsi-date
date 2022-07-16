@@ -19,14 +19,9 @@ namespace Cdsi.Date
 
         public bool Equals(Interval x, Interval y)
         {
-            try
-            {
-                return x.Value.Equals(y.Value) && x.Unit == y.Unit;
-            }
-            catch
-            {
-                return false;
-            }
+            var a = MaxDate.Value + x;
+            var b = MaxDate.Value + y;
+            return a.Equals(b);
         }
 
         public int GetHashCode([DisallowNull] Interval obj)
@@ -39,14 +34,17 @@ namespace Cdsi.Date
     {
         public int Compare(Interval x, Interval y)
         {
-            if (x.Unit == y.Unit)
-            {
-                return x.Value.CompareTo(y.Value);
-            }
-            else
-            {
-                return x.Unit.CompareTo(y.Unit);
-            }
+            var a = MaxDate.Value + x;
+            var b = MaxDate.Value + y;
+            return a.CompareTo(b);
+        }
+    }
+
+    public class IntervalUnitComparer : IComparer<Interval>
+    {
+        public int Compare(Interval x, Interval y)
+        {
+           return x.Unit.CompareTo(y.Unit);
         }
     }
 }
