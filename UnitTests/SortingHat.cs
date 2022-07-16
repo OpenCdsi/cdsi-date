@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using Cdsi;
+﻿using Cdsi.Date;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Cdsi.CalcDt.Tests
@@ -23,7 +23,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var Intervals = SameUnitList();
             Intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(Interval.Year, Intervals.First());
+            Assert.AreEqual(1, Intervals.First().Value);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var Intervals = DifferentUnitList();
             Intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(Interval.Week, Intervals.First());
+            Assert.AreEqual(IntervalUnit.Year, Intervals.First().Unit);
         }
     }
 }

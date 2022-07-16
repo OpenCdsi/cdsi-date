@@ -1,10 +1,10 @@
-﻿namespace Cdsi
-{    public enum IntervalUnit
+﻿namespace Cdsi.Date
+{
+    public enum IntervalUnit
     {
-        Day,
-        Week,
+        Year,
         Month,
-        Year
+        Week,
+        Day
     }
 }
-   

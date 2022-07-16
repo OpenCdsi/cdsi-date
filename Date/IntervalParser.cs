@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Cdsi.Date;
+﻿using System.Text.RegularExpressions;
 
-namespace Cdsi
+namespace Cdsi.Date
 {
     public readonly partial struct Interval
     {
-        private static readonly Regex re = new("^([\\+-]?\\d+)(\\w+)");
+        internal static readonly Regex re = new("^([\\+-]?\\d+)(\\w+)");
 
-        public static Interval Parse(string str)
+        public static Interval Parse(string text)
         {
-            str = str.Replace(" ", "");
-            var match = re.Match(str);
+            text = text.Replace(" ", "");
+            var match = re.Match(text);
             if (match.Success)
             {
                 return new()
@@ -27,9 +20,10 @@ namespace Cdsi
             }
             else
             {
-                throw new ArgumentException(str);
+                throw new ArgumentException(text);
             }
         }
+
         internal static IntervalUnit ParseUnit(string text)
         {
             text = text.ToLower();
@@ -42,34 +36,17 @@ namespace Cdsi
                 _ => throw new ArgumentException(text),
             };
         }
-        public static IEnumerable<Interval> ParseMany(string str)
-        {
-            var intervals = new List<Interval>();
 
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                intervals.Add(Interval.Min);
-                return intervals;
-            }
-
-            str = str.Replace(" ", "");
-            while (!string.IsNullOrEmpty(str))
-            {
-                intervals.Add(Parse(str));
-                str = re.Replace(str, "");
-            }
-            return intervals;
-        }
-        public static bool TryParse(string str, out Interval result)
+        public static bool TryParse(string text, out Interval result)
         {
             try
             {
-                result = Parse(str);
+                result = Parse(text);
                 return true;
             }
             catch (ArgumentException)
             {
-                result = default;
+                result = Interval.Min;
                 return false;
             }
         }

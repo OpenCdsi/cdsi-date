@@ -1,5 +1,4 @@
-﻿using Cdsi.Date;
-namespace Cdsi
+﻿namespace Cdsi.Date
 {
     public readonly partial struct Interval
     {
@@ -14,16 +13,18 @@ namespace Cdsi
 
         public static Interval operator -(Interval a, Interval b)
         {
-            return a + (-1 * b);
+            return a + (-b);
+        }
+
+        public static Interval operator -(Interval a)
+        {
+            return -1 * a;
         }
 
         // DateTime:Interval
         public static DateTime operator +(DateTime a, Interval b)
         {
-            var result = a.Add(b);
-            if (result < Defaults.MinDate) { result = Defaults.MinDate; }
-            else if (result > Defaults.MaxDate) { result = Defaults.MaxDate; }
-            return result;
+            return a.Add(b).Clamp();
         }
         public static DateTime operator -(DateTime a, Interval b)
         {

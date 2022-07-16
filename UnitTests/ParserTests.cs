@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Cdsi;
+using Cdsi.Date;
+using System;
 
 namespace Cdsi.CalcDt.Tests
 {
@@ -25,28 +27,44 @@ namespace Cdsi.CalcDt.Tests
         }
 
         [TestMethod]
-        public void CanParseMultipleIntervals()
+        public void CanParseDuration()
         {
             var text = "6 years - 4 days";
-            var intervals = Interval.ParseMany(text);
-            Assert.AreEqual(6, intervals.First().Value);
-            Assert.AreEqual(IntervalUnit.Day, intervals.ElementAt(1).Unit);
+            var duration = Duration.Parse(text);
+            Assert.AreEqual(6, duration.Values[0].Value);
+            Assert.AreEqual(IntervalUnit.Day, duration.Values[1].Unit);
         }
 
         [TestMethod]
-        public void ParseNullStringIsEmpty()
+        public void CanParseOutOfOrderDuration()
+        {
+            var text = "- 4 days + 6 years ";
+            var duration = Duration.Parse(text);
+            Assert.AreEqual(6, duration.Values[0].Value);
+            Assert.AreEqual(IntervalUnit.Day, duration.Values[1].Unit);
+        }
+
+        [TestMethod]
+        public void ParseIntervalNullStringIsEmpty()
         {
             var text = "";
-            Interval.TryParse(text, out var interval);
-            Assert.AreEqual(Interval.Min, interval);
+            Interval.TryParse(text, out var obj);
+            Assert.AreEqual(Interval.Min, obj);
+        }
+
+        [TestMethod]
+        public void ParseDurationNullStringIsEmpty()
+        {
+            var text = "";
+            Duration.TryParse(text, out var obj);
+            Assert.AreEqual(Interval.Min, obj.Values[0]);
         }
 
         [TestMethod]
         public void ParseManyNullStringIsEmpty()
         {
             var text = "";
-            var intervals = Interval.ParseMany(text);
-            Assert.AreEqual(Interval.Min, intervals.First());
+            Assert.ThrowsException<ArgumentException>(() => Interval.Parse(text));
         }
     }
 }

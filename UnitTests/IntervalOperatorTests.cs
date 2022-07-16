@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Cdsi.Date;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
-using Cdsi;
 
 namespace Cdsi.CalcDt.Tests
 {
     [TestClass]
-    public class OperatorTests
+    public class IntervalOperatorTests
     {
         // Table 3-6
         [TestMethod]

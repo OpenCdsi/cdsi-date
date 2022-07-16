@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-
-namespace Cdsi
+﻿namespace Cdsi.Date
 {
     public static class DateTimeExtensions
     {
@@ -48,13 +41,22 @@ namespace Cdsi
         public static DateTime Add(this DateTime date, IEnumerable<Interval> intervals)
         {
             var lst = intervals.ToList();
-            lst.Sort(new IntervalComparer());
-            lst.Reverse(); // add years first, then month, week, day.
+            lst.Sort(new IntervalComparer()); // add years first, then month, week, day.
             foreach (var interval in lst)
             {
                 date += interval;
             }
             return date;
+        }
+
+        public static DateTime Clamp(this DateTime date)
+        {
+            if (date < Defaults.MinDate)
+                return Defaults.MinDate;
+            else if (date > Defaults.MaxDate)
+                return Defaults.MaxDate;
+            else
+                return date;
         }
     }
 }
