@@ -49,7 +49,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var text = "";
             Interval.TryParse(text, out var obj);
-            Assert.AreEqual(Interval.Min, obj);
+            Assert.AreEqual(Interval.Empty, obj);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var text = "";
             Duration.TryParse(text, out var obj);
-            Assert.AreEqual(Interval.Min, obj.Values[0]);
+            Assert.AreEqual(Duration.Empty, obj);
         }
 
         [TestMethod]

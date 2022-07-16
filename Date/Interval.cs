@@ -11,20 +11,22 @@ namespace Cdsi.Date
 {
     public readonly partial struct Interval : IEqualityComparer<Interval>
     {
+        private static readonly Interval _empty = new() { Value = 0, Unit = IntervalUnit.Day };
+        public static Interval Empty => _empty;
+
         public int Value { get; init; }
         public IntervalUnit Unit { get; init; }
 
-        public static  Interval Min => Defaults.MinInterval;
-        public static  Interval Max => Defaults.MaxInterval;
-
-        public static Interval Day => new() { Unit = IntervalUnit.Day, Value = 1 };
-        public static Interval Week => new() { Unit = IntervalUnit.Week, Value = 1 };
-        public static Interval Month => new() { Unit = IntervalUnit.Month, Value = 1 };
-        public static Interval Year => new() { Unit = IntervalUnit.Year, Value = 1 };
-
         public bool Equals(Interval x, Interval y)
         {
-            return x.Value.Equals(y.Value) && x.Unit == y.Unit;
+            try
+            {
+                return x.Value.Equals(y.Value) && x.Unit == y.Unit;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public int GetHashCode([DisallowNull] Interval obj)

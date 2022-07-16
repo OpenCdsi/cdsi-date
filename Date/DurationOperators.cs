@@ -8,14 +8,19 @@ namespace Cdsi.Date
 {
     public readonly partial struct Duration
     {
+        private static Duration CreateFromIntervals(List<Interval> values)
+        {
+            values.Sort(new IntervalComparer());
+            return new Duration { Values = values.ToArray() };
+        }
+
         // Duration:Duration
         public static Duration operator +(Duration a, Duration b)
         {
-            var values = new List<Interval>(a.Values);
+            var values = a.Values.ToList();
             values.AddRange(b.Values);
-            values.Sort(new IntervalComparer());
 
-            return new Duration { Values = values.ToArray() };
+            return CreateFromIntervals(values);
         }
         public static Duration operator -(Duration a, Duration b)
         {
@@ -23,10 +28,23 @@ namespace Cdsi.Date
         }
         public static Duration operator -(Duration a)
         {
-            var values = new List<Interval>(a.Values.Select(x => -1 * x));
-            values.Sort(new IntervalComparer());
+            return a * -1;
+        }
+        public static Duration operator *(Duration a, int b)
+        {
+            var values = a.Values.Select(x => b * x).ToList();
 
-            return new Duration { Values = values.ToArray() };
+            return CreateFromIntervals(values);
+        }
+        public static Duration operator *(int b, Duration a)
+        {
+            return a * b;
+        }
+        public static Duration operator /(Duration a, int b)
+        {
+            var values = a.Values.Select(x => x / b).ToList();
+
+            return CreateFromIntervals(values);
         }
 
 

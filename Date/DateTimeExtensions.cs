@@ -51,10 +51,10 @@
 
         public static DateTime Clamp(this DateTime date)
         {
-            if (date < Defaults.MinDate)
-                return Defaults.MinDate;
-            else if (date > Defaults.MaxDate)
-                return Defaults.MaxDate;
+            if (date < MinDate.Value)
+                return MinDate.Value;
+            else if (date > MaxDate.Value)
+                return MaxDate.Value;
             else
                 return date;
         }

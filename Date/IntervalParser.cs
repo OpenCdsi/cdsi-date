@@ -46,7 +46,7 @@ namespace Cdsi.Date
             }
             catch (ArgumentException)
             {
-                result = Interval.Min;
+                result = Empty;
                 return false;
             }
         }

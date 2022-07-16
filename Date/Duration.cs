@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 
 namespace Cdsi.Date
 {
-    public readonly partial struct Duration
+    public readonly partial struct Duration : IEqualityComparer<Duration>
     {
+        private static readonly Duration _empty = new() { Values = new[] { new Interval { Value = 0, Unit = IntervalUnit.Day } } };
+        public static Duration Empty => _empty;
         public readonly Interval[] Values { get; init; }
 
-        public static Duration Min => new() { Values = new[] { Defaults.MinInterval } };
-        public static Duration Max => new() { Values = new[] { Defaults.MaxInterval } };
-        public static Duration Day => new() { Values = new[] { Interval.Day } };
-        public static Duration Week => new() { Values = new[] { Interval.Week } };
-        public static Duration Month => new() { Values = new[] { Interval.Month } };
-        public static Duration Year => new() { Values = new[] { Interval.Year } };
+        public bool Equals(Duration x, Duration y)
+        {
+            return x.Values.Length == y.Values.Length 
+                && x.Values.Zip(y.Values).All(xy => xy.First.Equals(xy.Second));
+        }
+
+        public int GetHashCode([DisallowNull] Duration obj)
+        {
+            return obj.Values.GetHashCode();
+        }
     }
 }

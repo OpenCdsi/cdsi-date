@@ -36,7 +36,7 @@ namespace Cdsi.Date
             }
             catch (ArgumentException)
             {
-                result = Duration.Min;
+                result = Empty;
                 return false;
             }
         }

@@ -11,11 +11,11 @@ namespace Cdsi.CalcDt.Tests
     {
         internal List<Interval> SameUnitList()
         {
-            return new List<Interval> { Interval.Year * 12, Interval.Year };
+            return new List<Interval> { Defaults.Year * 12, Defaults.Year };
         }
         internal List<Interval> DifferentUnitList()
         {
-            return new List<Interval> { Interval.Year, Interval.Week };
+            return new List<Interval> { Defaults.Year, Defaults.Week };
         }
 
         [TestMethod]
