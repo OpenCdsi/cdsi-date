@@ -13,7 +13,7 @@ namespace OpenCdsi.Date
 
         private static readonly Duration _empty = new() { Values = new[] { new Interval { Value = 0, Unit = IntervalUnit.Day } } };
         public static Duration MinValue => _empty;
-        public static Duration Miaxalue => _max;
+        public static Duration MaxValue => _max;
         public readonly Interval[] Values { get; init; }
 
         public bool Equals(Duration x, Duration y)
