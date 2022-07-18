@@ -2,7 +2,7 @@
 {
     public static class DateTimeExtensions
     {
-        public static DateTime AsCdsiDate(this DateTime date)
+        public static DateTime ToCdsiDate(this DateTime date)
         {
             return date <= MinCdsiDate.Value
                 ? MinCdsiDate.Value
