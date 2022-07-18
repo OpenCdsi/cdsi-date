@@ -1,7 +1,15 @@
-﻿namespace Cdsi.Date
+﻿namespace OpenCdsi.Date
 {
     public static class DateTimeExtensions
     {
+        public static DateTime AsCdsiDate(this DateTime date)
+        {
+            return date <= MinCdsiDate.Value
+                ? MinCdsiDate.Value
+                : date >= MaxCdsiDate.Value
+                ? MaxCdsiDate.Value
+                : date;
+        }
         public static DateTime Add(this DateTime date, Interval interval)
         {
             return interval.Unit switch

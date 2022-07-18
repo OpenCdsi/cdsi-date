@@ -1,8 +1,8 @@
-﻿using Cdsi.Date;
+﻿using OpenCdsi.Date;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Cdsi.CalcDt.Tests
+namespace OpenCdsi.Date.Tests
 {
     [TestClass]
     public class DurationOperatorTests

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cdsi.Date
+namespace OpenCdsi.Date
 {
     public readonly partial struct Duration
     {
@@ -36,7 +36,7 @@ namespace Cdsi.Date
             }
             catch (ArgumentException)
             {
-                result = Empty;
+                result = MinValue;
                 return false;
             }
         }

@@ -1,11 +1,11 @@
-﻿using Cdsi.Date;
+﻿using OpenCdsi.Date;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cdsi.CalcDt.Tests
+namespace OpenCdsi.Date.Tests
 {
     internal static class Defaults
     {

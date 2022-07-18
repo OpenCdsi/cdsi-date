@@ -5,18 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cdsi.Date
+namespace OpenCdsi.Date
 {
     public readonly partial struct Duration : IEqualityComparer<Duration>
     {
+        private static readonly Duration _max = new() { Values = new[] { new Interval { Value = 2999, Unit = IntervalUnit.Year } } };
+
         private static readonly Duration _empty = new() { Values = new[] { new Interval { Value = 0, Unit = IntervalUnit.Day } } };
-        public static Duration Empty => _empty;
+        public static Duration MinValue => _empty;
+        public static Duration Miaxalue => _max;
         public readonly Interval[] Values { get; init; }
 
         public bool Equals(Duration x, Duration y)
         {
-            var a = MaxDate.Value + x;
-            var b = MaxDate.Value + y;
+            var a = MaxCdsiDate.Value + x;
+            var b = MaxCdsiDate.Value + y;
             return a.Equals(b);
         }
 
@@ -30,8 +33,8 @@ namespace Cdsi.Date
     {
         public int Compare(Duration x, Duration y)
         {
-            var a = MaxDate.Value + x;
-            var b = MaxDate.Value + y;
+            var a = MaxCdsiDate.Value + x;
+            var b = MaxCdsiDate.Value + y;
             return a.CompareTo(b);
         }
     }

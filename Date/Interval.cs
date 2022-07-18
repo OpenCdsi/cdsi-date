@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Cdsi.Date;
 
-namespace Cdsi.Date
+namespace OpenCdsi.Date
 {
     public readonly partial struct Interval : IEqualityComparer<Interval>
     {
@@ -19,8 +18,8 @@ namespace Cdsi.Date
 
         public bool Equals(Interval x, Interval y)
         {
-            var a = MaxDate.Value + x;
-            var b = MaxDate.Value + y;
+            var a = MaxCdsiDate.Value + x;
+            var b = MaxCdsiDate.Value + y;
             return a.Equals(b);
         }
 
@@ -34,8 +33,8 @@ namespace Cdsi.Date
     {
         public int Compare(Interval x, Interval y)
         {
-            var a = MaxDate.Value + x;
-            var b = MaxDate.Value + y;
+            var a = MaxCdsiDate.Value + x;
+            var b = MaxCdsiDate.Value + y;
             return a.CompareTo(b);
         }
     }

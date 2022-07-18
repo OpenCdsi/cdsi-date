@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Cdsi;
-using Cdsi.Date;
+using OpenCdsi.Date;
 using System;
 
-namespace Cdsi.CalcDt.Tests
+namespace OpenCdsi.Date.Tests
 {
     [TestClass]
     public class ParserTests
@@ -57,7 +56,7 @@ namespace Cdsi.CalcDt.Tests
         {
             var text = "";
             Duration.TryParse(text, out var obj);
-            Assert.AreEqual(Duration.Empty, obj);
+            Assert.AreEqual(Duration.MinValue, obj);
         }
 
         [TestMethod]

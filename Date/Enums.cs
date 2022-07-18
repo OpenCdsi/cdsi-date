@@ -1,4 +1,4 @@
-﻿namespace Cdsi.Date
+﻿namespace OpenCdsi.Date
 {
     public enum IntervalUnit
     {

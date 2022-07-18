@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Cdsi.Date
+namespace OpenCdsi.Date
 {
     public readonly partial struct Interval
     {

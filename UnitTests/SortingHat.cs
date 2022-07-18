@@ -1,10 +1,10 @@
-﻿using Cdsi.Date;
+﻿using OpenCdsi.Date;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Cdsi.CalcDt.Tests
+namespace OpenCdsi.Date.Tests
 {
     [TestClass]
     public class SortingTests
