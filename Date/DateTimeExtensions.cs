@@ -2,6 +2,11 @@
 {
     public static class DateTimeExtensions
     {
+        /// <summary>
+        /// Clamp a DateTime between CDSi MinDate (1/1/1900) and CDSi MaxDate (12/31/2999)
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static DateTime ToCdsiDate(this DateTime date)
         {
             return date <= MinCdsiDate.Value
