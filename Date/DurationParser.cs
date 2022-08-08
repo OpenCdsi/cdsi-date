@@ -27,6 +27,12 @@ namespace OpenCdsi.Date
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="result"></param>
+        /// <returns>If the method returns false then the result variable is set to MinValue. </returns>
         public static bool TryParse(string text, out Duration result)
         {
             try
