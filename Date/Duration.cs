@@ -27,6 +27,11 @@ namespace OpenCdsi.Date
         {
             return obj.GetHashCode();
         }
+        
+        public TimeSpan ToTimeSpan()
+        {
+            return (DateTime.MinValue + this) - DateTime.MinValue;
+        }
     }
 
     public class DurationComparer : IComparer<Duration>

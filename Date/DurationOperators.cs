@@ -68,5 +68,47 @@ namespace OpenCdsi.Date
         {
             return a - b;
         }
+
+        // Duration:Timespan
+        public static bool operator <(Duration a, TimeSpan b)
+        {
+            return a.ToTimeSpan() < b;
+        }
+
+        public static bool operator >(Duration a, TimeSpan b)
+        {
+            return a.ToTimeSpan() > b;
+        }
+
+        public static bool operator <=(Duration a, TimeSpan b)
+        {
+            return a.ToTimeSpan() <= b;
+        }
+
+        public static bool operator >=(Duration a, TimeSpan b)
+        {
+            return a.ToTimeSpan() >= b;
+        }
+
+        // Timespan:Duration
+        public static bool operator <(TimeSpan b, Duration a)
+        {
+            return a < b;
+        }
+
+        public static bool operator >(TimeSpan b, Duration a)
+        {
+            return a > b;
+        }
+
+        public static bool operator <=(TimeSpan b, Duration a)
+        {
+            return a <= b;
+        }
+
+        public static bool operator >=(TimeSpan b, Duration a)
+        {
+            return a >= b;
+        }
     }
 }
