@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.4.1</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/opencdsi/cdsi-calc-dt.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/opencdsi/cdsi-date.git</RepositoryUrl>
+    <PackageId>OpenCdsi.Date</PackageId>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <None Include="..\README.md">
       <Pack>True</Pack>
