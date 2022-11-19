@@ -13,7 +13,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 01/01/2000 + 3 years = 01/01/2003
             var d = new DateTime(2000, 1, 1);
-            var i = Duration.Parse("3 years");
+            var i = Interval.Parse("3 years");
             Assert.AreEqual(new DateTime(2003, 1, 1), d + i);
         }
 
@@ -22,7 +22,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 01/01/2000 + 6 months = 07/01/2000
             var d = new DateTime(2000, 1, 1);
-            var i = Duration.Parse("6 months");
+            var i = Interval.Parse("6 months");
             Assert.AreEqual(new DateTime(2000, 7, 1), d + i);
         }
 
@@ -31,7 +31,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 11/01/2000 + 6 months = 05/01/2001
             var d = new DateTime(2000, 11, 1);
-            var i = Duration.Parse("6 months");
+            var i = Interval.Parse("6 months");
             Assert.AreEqual(new DateTime(2001, 5, 1), d + i);
         }
 
@@ -40,7 +40,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 01/01/2000 + 3 days = 01/04/2000
             var d = new DateTime(2000, 1, 1);
-            var i = Duration.Parse("3 days");
+            var i = Interval.Parse("3 days");
             Assert.AreEqual(new DateTime(2000, 1, 4), d + i);
         }
 
@@ -49,7 +49,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 01/01/2000 + 3 weeks = 01/22/2000
             var d = new DateTime(2000, 1, 1);
-            var i = Duration.Parse("3 week");
+            var i = Interval.Parse("3 week");
             Assert.AreEqual(new DateTime(2000, 1, 22), d + i);
         }
 
@@ -58,7 +58,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 02/01/2000 + 5 weeks = 03/07/2000(leap year)
             var d = new DateTime(2000, 2, 1);
-            var i = Duration.Parse("5 week");
+            var i = Interval.Parse("5 week");
             Assert.AreEqual(new DateTime(2000, 3, 7), d + i);
         }
 
@@ -67,7 +67,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 02/01/2001 + 5 weeks = 03/08/2001(no leap year)
             var d = new DateTime(2001, 2, 1);
-            var i = Duration.Parse("5 week");
+            var i = Interval.Parse("5 week");
             Assert.AreEqual(new DateTime(2001, 3, 8), d + i);
         }
 
@@ -76,7 +76,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 01/15/2000 – 4 days = 01/11/2000
             var d = new DateTime(2000, 1, 15);
-            var i = Duration.Parse("- 4 days");
+            var i = Interval.Parse("- 4 days");
             Assert.AreEqual(new DateTime(2000, 1, 11), d + i);
         }
 
@@ -85,7 +85,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 03/31/2000 + 6 months = 10/01/2000 (September 31 does not exist)
             var d = new DateTime(2000, 3, 31);
-            var i = Duration.Parse("6 months");
+            var i = Interval.Parse("6 months");
             Assert.AreEqual(new DateTime(2000, 10, 1), d + i);
         }
 
@@ -94,7 +94,7 @@ namespace OpenCdsi.Date.Tests
         {
             // 08/31/2000 + 6 months = 03/01/2001 (February 31 does not exist)
             var d = new DateTime(2000, 8, 31);
-            var i = Duration.Parse("6 month");
+            var i = Interval.Parse("6 month");
             Assert.AreEqual(new DateTime(2001, 3, 1), d + i);
         }
 
@@ -102,7 +102,7 @@ namespace OpenCdsi.Date.Tests
         public void JuneMinus6MonthsIsDecember()
         {
             var d = new DateTime(2020, 6, 9);
-            var i = Duration.Parse("6 month");
+            var i = Interval.Parse("6 month");
             Assert.AreEqual(new DateTime(2019, 12, 10), d - i);
         }
     }

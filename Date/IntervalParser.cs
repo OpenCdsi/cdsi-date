@@ -1,42 +1,32 @@
-﻿using System.Text.RegularExpressions;
-
-namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Date
 {
     public readonly partial struct Interval
     {
-        internal static readonly Regex re = new("^([\\+-]?\\d+)(\\w+)");
-
         public static Interval Parse(string text)
         {
             text = text.Replace(" ", "");
-            var match = re.Match(text);
-            if (match.Success)
+            var components = new List<CalendarUnit>();
+            do
             {
-                return new()
-                {
-                    Value = int.Parse(match.Groups[1].Value),
-                    Unit = ParseUnit(match.Groups[2].Value)
-                };
-            }
-            else
-            {
-                throw new ArgumentException(text);
-            }
-        }
+                components.Add(CalendarUnit.Parse(text));
+                text = CalendarUnit.re.Replace(text, "");
 
-        internal static IntervalUnit ParseUnit(string text)
-        {
-            text = text.ToLower();
-            return (text.First()) switch
+            } while (!string.IsNullOrEmpty(text));
+
+            components.Sort(new CalendarlUnitNameComparer());
+
+            return new Interval()
             {
-                'y' => IntervalUnit.Year,
-                'm' => IntervalUnit.Month,
-                'w' => IntervalUnit.Week,
-                'd' => IntervalUnit.Day,
-                _ => throw new ArgumentException(text),
+                Components = components.ToArray()
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="result"></param>
+        /// <returns>If the method returns false then the result variable is set to Interval.Empty. </returns>
         public static bool TryParse(string text, out Interval result)
         {
             try

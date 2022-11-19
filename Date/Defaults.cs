@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Date
 {
-    public static class MinCdsiDate
+    public static class Defaults
     {
-        private static readonly DateTime _value = new DateTime(1900, 1, 1);
-        public static DateTime Value =>_value;
-    }
-    public static class MaxCdsiDate
-    {
-        private static readonly DateTime _value = new DateTime(2999, 12, 31);
-        public static DateTime Value => _value;
+        private static readonly DateTime _minValue = new(1900, 1, 1);
+        private static readonly DateTime _maxValue = new(2999, 12, 31);
+        public static DateTime MinValue => _minValue;
+        public static DateTime MaxValue => _maxValue;
     }
 }
