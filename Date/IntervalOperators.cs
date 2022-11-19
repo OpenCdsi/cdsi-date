@@ -1,62 +1,108 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
     public readonly partial struct Interval
     {
+        private static Interval FromComponents(List<CalendarUnit> components)
+        {
+            components.Sort(new CalendarlUnitNameComparer());
+            return new Interval { Components = components.ToArray() };
+        }
 
         // Interval:Interval
         public static Interval operator +(Interval a, Interval b)
         {
-            if (a.Unit != b.Unit) throw new ArgumentException("Both intervals must have the same Unit.");
+            var components = a.Components.ToList();
+            components.AddRange(b.Components);
 
-            return new Interval { Value = a.Value + b.Value, Unit = a.Unit };
+            return FromComponents(components);
         }
-
         public static Interval operator -(Interval a, Interval b)
         {
             return a + (-b);
         }
-
         public static Interval operator -(Interval a)
         {
-            return -1 * a;
-        }
-
-        // DateTime:Interval
-        public static DateTime operator +(DateTime a, Interval b)
-        {
-            return a.Add(b);
-        }
-        public static DateTime operator -(DateTime a, Interval b)
-        {
-            return a.Add(-1 * b);
-        }
-
-        // Interval:Integer
-        public static Interval operator +(Interval a, int b)
-        {
-            return new Interval { Value = a.Value + b, Unit = a.Unit };
-        }
-        public static Interval operator -(Interval a, int b)
-        {
-            return new Interval { Value = a.Value - b, Unit = a.Unit };
+            return a * -1;
         }
         public static Interval operator *(Interval a, int b)
         {
-            return new Interval { Value = a.Value * b, Unit = a.Unit };
-        }
-        public static Interval operator /(Interval a, int b)
-        {
-            return new Interval { Value = a.Value / b, Unit = a.Unit };
-        }
+            var components = a.Components.Select(x => b * x).ToList();
 
-        // Interval:Integer (associative operations)
-        public static Interval operator +(int b, Interval a)
-        {
-            return a + b;
+            return FromComponents(components);
         }
         public static Interval operator *(int b, Interval a)
         {
             return a * b;
+        }
+        public static Interval operator /(Interval a, int b)
+        {
+            var components = a.Components.Select(x => x / b).ToList();
+
+            return FromComponents(components);
+        }
+
+
+        // DateTime:Interval
+        public static DateTime operator +(DateTime a, Interval b)
+        {
+            return a.Add(b.Components);
+        }
+
+        public static DateTime operator +(Interval b, DateTime a)
+        {
+            return a + b;
+        }
+
+        public static DateTime operator -(DateTime a, Interval b)
+        {
+            return a + (-b);
+        }
+
+        public static DateTime operator -(Interval b, DateTime a)
+        {
+            return a - b;
+        }
+
+        // Interval:Timespan
+        public static bool operator <(Interval a, TimeSpan b)
+        {
+            return a.ToTimeSpan() < b;
+        }
+
+        public static bool operator >(Interval a, TimeSpan b)
+        {
+            return a.ToTimeSpan() > b;
+        }
+
+        public static bool operator <=(Interval a, TimeSpan b)
+        {
+            return a.ToTimeSpan() <= b;
+        }
+
+        public static bool operator >=(Interval a, TimeSpan b)
+        {
+            return a.ToTimeSpan() >= b;
+        }
+
+        // Timespan:Interval
+        public static bool operator <(TimeSpan b, Interval a)
+        {
+            return a < b;
+        }
+
+        public static bool operator >(TimeSpan b, Interval a)
+        {
+            return a > b;
+        }
+
+        public static bool operator <=(TimeSpan b, Interval a)
+        {
+            return a <= b;
+        }
+
+        public static bool operator >=(TimeSpan b, Interval a)
+        {
+            return a >= b;
         }
     }
 }

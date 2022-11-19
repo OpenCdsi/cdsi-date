@@ -1,4 +1,4 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
     public static class DateTimeExtensions
     {
@@ -7,31 +7,31 @@
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime ToCdsiDate(this DateTime date)
+        public static DateTime Clamp(this DateTime date)
         {
-            return date <= MinCdsiDate.Value
-                ? MinCdsiDate.Value
-                : date >= MaxCdsiDate.Value
-                ? MaxCdsiDate.Value
+            return date < Date.MinValue
+                ? Date.MinValue
+                : date > Date.MaxValue
+                ? Date.MaxValue
                 : date;
         }
-        public static DateTime Add(this DateTime date, Interval interval)
+        public static DateTime Add(this DateTime date, CalendarUnit component)
         {
-            return interval.Unit switch
+            return component.Name switch
             {
-                IntervalUnit.Day => date.AddDays(interval.Value),
-                IntervalUnit.Week => date.AddDays(interval.Value * 7),
-                IntervalUnit.Month => date.CALCDT_5(interval.Value),
-                IntervalUnit.Year => date.CALCDT_5(interval.Value * 12),
+                UnitName.Day => date.AddDays(component.Value),
+                UnitName.Week => date.AddDays(component.Value * 7),
+                UnitName.Month => date.CALCDT_5(component.Value),
+                UnitName.Year => date.CALCDT_5(component.Value * 12),
                 _ => throw new ArgumentException()
             };
         }
 
-        internal static DateTime CALCDT_5(this DateTime date, int Interval)
+        internal static DateTime CALCDT_5(this DateTime date, int value)
         {
             try
             {
-                var m = date.Month + Interval;
+                var m = date.Month + value;
                 var y = date.Year;
                 if (m > 12)
                 {
@@ -41,23 +41,21 @@
             }
             catch (ArgumentOutOfRangeException)
             {
-                return date.AddMonths(Interval).AddDays(1); // Move to the start of the next month upon invalid date. Table 3-6
+                return date.AddMonths(value).AddDays(1); // Move to the start of the next month upon invalid date. Table 3-6
             }
         }
 
         /// <summary>
-        /// Add a list of durations to a date. Order the intervals by Year, Month, Week, Day.
+        /// Add a list of calender units to a DateTime.
         /// </summary>
         /// <param name="date"></param>
-        /// <param name="intervals"></param>
+        /// <param name="components">An enumerable of CalendarUnits sorted by year -> month -> day</param>
         /// <returns></returns>
-        public static DateTime Add(this DateTime date, IEnumerable<Interval> intervals)
+        public static DateTime Add(this DateTime date, IEnumerable<CalendarUnit> components)
         {
-            var lst = intervals.ToList();
-            lst.Sort(new IntervalComparer()); // add years first, then month, week, day.
-            foreach (var interval in lst)
+            foreach (var component in components)
             {
-                date += interval;
+                date += component;
             }
             return date;
         }

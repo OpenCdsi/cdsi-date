@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace OpenCdsi.Date
+namespace OpenCdsi.Calendar
 {
     public readonly partial struct Interval : IEqualityComparer<Interval>
     {
-        private static readonly Interval _empty = new() { Value = 0, Unit = IntervalUnit.Day };
+        private static readonly Interval _empty = new() { Components = new[] { new CalendarUnit { Value = 0, Name = UnitName.Day } } };
         public static Interval Empty => _empty;
-
-        public int Value { get; init; }
-        public IntervalUnit Unit { get; init; }
+        public readonly CalendarUnit[] Components { get; init; }
 
         public bool Equals(Interval x, Interval y)
         {
-            var a = MaxCdsiDate.Value + x;
-            var b = MaxCdsiDate.Value + y;
+            var a = DateTime.MinValue + x;
+            var b = DateTime.MinValue + y;
             return a.Equals(b);
         }
 
@@ -27,23 +19,20 @@ namespace OpenCdsi.Date
         {
             return obj.GetHashCode();
         }
+
+        public TimeSpan ToTimeSpan()
+        {
+            return (DateTime.MinValue + this) - DateTime.MinValue;
+        }
     }
 
     public class IntervalComparer : IComparer<Interval>
     {
         public int Compare(Interval x, Interval y)
         {
-            var a = MaxCdsiDate.Value + x;
-            var b = MaxCdsiDate.Value + y;
+            var a = DateTime.MinValue + x;
+            var b = DateTime.MinValue + y;
             return a.CompareTo(b);
-        }
-    }
-
-    public class IntervalUnitComparer : IComparer<Interval>
-    {
-        public int Compare(Interval x, Interval y)
-        {
-           return x.Unit.CompareTo(y.Unit);
         }
     }
 }

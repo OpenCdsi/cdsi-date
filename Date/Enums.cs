@@ -1,6 +1,6 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
-    public enum IntervalUnit
+    public enum UnitName
     {
         Year,
         Month,

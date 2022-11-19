@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Date\OpenCdsi.Date.csproj" />
+    <ProjectReference Include="..\Date\OpenCdsi.Calendar.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using OpenCdsi.Date;
+using OpenCdsi.Calendar;
 using System;
 
-namespace OpenCdsi.Date.Tests
+namespace OpenCdsi.Calendar.Tests
 {
     [TestClass]
     public class ParserTests
@@ -12,39 +12,47 @@ namespace OpenCdsi.Date.Tests
         public void CanParseAnInterval()
         {
             var text = "6 years";
-            var interval = Interval.Parse(text);
+            var interval = CalendarUnit.Parse(text);
             Assert.AreEqual(6, interval.Value);
-            Assert.AreEqual(IntervalUnit.Year, interval.Unit);
+            Assert.AreEqual(UnitName.Year, interval.Name);
         }
         [TestMethod]
         public void CanParseAnIntervalWithJunkText()
         {
             var text = "6 years plus some junk text";
-            var interval = Interval.Parse(text);
+            var interval = CalendarUnit.Parse(text);
             Assert.AreEqual(6, interval.Value);
-            Assert.AreEqual(IntervalUnit.Year, interval.Unit);
+            Assert.AreEqual(UnitName.Year, interval.Name);
         }
 
         [TestMethod]
         public void CanParseDuration()
         {
             var text = "6 years - 4 days";
-            var duration = Duration.Parse(text);
-            Assert.AreEqual(6, duration.Values[0].Value);
-            Assert.AreEqual(IntervalUnit.Day, duration.Values[1].Unit);
+            var duration = Interval.Parse(text);
+            Assert.AreEqual(6, duration.Components[0].Value);
+            Assert.AreEqual(UnitName.Day, duration.Components[1].Name);
         }
 
         [TestMethod]
         public void CanParseOutOfOrderDuration()
         {
             var text = "- 4 days + 6 years ";
-            var duration = Duration.Parse(text);
-            Assert.AreEqual(6, duration.Values[0].Value);
-            Assert.AreEqual(IntervalUnit.Day, duration.Values[1].Unit);
+            var duration = Interval.Parse(text);
+            Assert.AreEqual(6, duration.Components[0].Value);
+            Assert.AreEqual(UnitName.Day, duration.Components[1].Name);
         }
 
         [TestMethod]
         public void ParseIntervalNullStringIsEmpty()
+        {
+            var text = "";
+            CalendarUnit.TryParse(text, out var obj);
+            Assert.AreEqual(CalendarUnit.Empty, obj);
+        }
+
+        [TestMethod]
+        public void ParseDurationNullStringIsEmpty()
         {
             var text = "";
             Interval.TryParse(text, out var obj);
@@ -52,18 +60,10 @@ namespace OpenCdsi.Date.Tests
         }
 
         [TestMethod]
-        public void ParseDurationNullStringIsEmpty()
-        {
-            var text = "";
-            Duration.TryParse(text, out var obj);
-            Assert.AreEqual(Duration.MinValue, obj);
-        }
-
-        [TestMethod]
         public void ParseManyNullStringIsEmpty()
         {
             var text = "";
-            Assert.ThrowsException<ArgumentException>(() => Interval.Parse(text));
+            Assert.ThrowsException<ArgumentException>(() => CalendarUnit.Parse(text));
         }
     }
 }

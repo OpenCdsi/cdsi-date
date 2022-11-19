@@ -1,17 +1,17 @@
-﻿using OpenCdsi.Date;
+﻿using OpenCdsi.Calendar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenCdsi.Date.Tests
+namespace OpenCdsi.Calendar.Tests
 {
     internal static class Defaults
     {
-        public static Interval Day => new() { Unit = IntervalUnit.Day, Value = 1 };
-        public static Interval Week => new() { Unit = IntervalUnit.Week, Value = 1 };
-        public static Interval Month => new() { Unit = IntervalUnit.Month, Value = 1 };
-        public static Interval Year => new() { Unit = IntervalUnit.Year, Value = 1 };
+        public static CalendarUnit Day => new() { Name = UnitName.Day, Value = 1 };
+        public static CalendarUnit Week => new() { Name = UnitName.Week, Value = 1 };
+        public static CalendarUnit Month => new() { Name = UnitName.Month, Value = 1 };
+        public static CalendarUnit Year => new() { Name = UnitName.Year, Value = 1 };
     }
 }

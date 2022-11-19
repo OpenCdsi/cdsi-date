@@ -1,37 +1,37 @@
-﻿using OpenCdsi.Date;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace OpenCdsi.Date.Tests
+namespace OpenCdsi.Calendar.Tests
 {
     [TestClass]
     public class SortingTests
     {
-        internal List<Interval> SameUnitList()
+        internal List<CalendarUnit> SameUnitList()
         {
-            return new List<Interval> { Defaults.Year * 12, Defaults.Year };
+            return new List<CalendarUnit> { Defaults.Year * 12, Defaults.Year };
         }
-        internal List<Interval> DifferentUnitList()
+        internal List<CalendarUnit> DifferentUnitList()
         {
-            return new List<Interval> { Defaults.Year, Defaults.Week };
-        }
-
-        [TestMethod]
-        public void SortYears()
-        {
-            var intervals = SameUnitList();
-            intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(Defaults.Year, intervals.First());
+            return new List<CalendarUnit> { Defaults.Week, Defaults.Year };
         }
 
         [TestMethod]
-        public void SortIntervals()
+        public void SortCalendarUnits()
         {
-            var intervals = DifferentUnitList();
-            intervals.Sort(new IntervalComparer());
-            Assert.AreEqual(Defaults.Week, intervals.First());
+            var components = SameUnitList();
+            components.Sort(new CalendarUnitComparer());
+            Assert.AreEqual(Defaults.Year, components.First());
+            Assert.AreEqual(1, components.First().Value);
+        }
+
+        [TestMethod]
+        public void SortByUnitName()
+        {
+            var components = DifferentUnitList();
+            components.Sort(new CalendarlUnitNameComparer());
+            Assert.AreEqual(Defaults.Year, components.First());
         }
     }
 }
