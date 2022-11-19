@@ -7,8 +7,8 @@
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/opencdsi/cdsi-date.git</RepositoryUrl>
-    <PackageId>OpenCdsi.Date</PackageId>
+    <RepositoryUrl>https://github.com/opencdsi/ocdsi-calendar.git</RepositoryUrl>
+    <PackageId>OpenCdsi.Calendar</PackageId>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 	
