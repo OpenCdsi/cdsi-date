@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace OpenCdsi.Date
+namespace OpenCdsi.Calendar
 {
     public readonly partial struct Interval : IEqualityComparer<Interval>
     {

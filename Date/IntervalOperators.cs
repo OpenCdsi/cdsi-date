@@ -1,4 +1,4 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
     public readonly partial struct Interval
     {

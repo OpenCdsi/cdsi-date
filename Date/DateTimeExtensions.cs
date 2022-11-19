@@ -1,4 +1,4 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
     public static class DateTimeExtensions
     {
@@ -9,20 +9,20 @@
         /// <returns></returns>
         public static DateTime Clamp(this DateTime date)
         {
-            return date <= Defaults.MinValue
-                ? Defaults.MinValue
-                : date >= Defaults.MaxValue
-                ? Defaults.MaxValue
+            return date < Date.MinValue
+                ? Date.MinValue
+                : date > Date.MaxValue
+                ? Date.MaxValue
                 : date;
         }
-        public static DateTime Add(this DateTime date, CalendarUnit interval)
+        public static DateTime Add(this DateTime date, CalendarUnit component)
         {
-            return interval.Name switch
+            return component.Name switch
             {
-                UnitName.Day => date.AddDays(interval.Value),
-                UnitName.Week => date.AddDays(interval.Value * 7),
-                UnitName.Month => date.CALCDT_5(interval.Value),
-                UnitName.Year => date.CALCDT_5(interval.Value * 12),
+                UnitName.Day => date.AddDays(component.Value),
+                UnitName.Week => date.AddDays(component.Value * 7),
+                UnitName.Month => date.CALCDT_5(component.Value),
+                UnitName.Year => date.CALCDT_5(component.Value * 12),
                 _ => throw new ArgumentException()
             };
         }

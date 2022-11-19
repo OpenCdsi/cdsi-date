@@ -1,6 +1,6 @@
-﻿namespace OpenCdsi.Date
+﻿namespace OpenCdsi.Calendar
 {
-    public static class Defaults
+    public static class Date
     {
         private static readonly DateTime _minValue = new(1900, 1, 1);
         private static readonly DateTime _maxValue = new(2999, 12, 31);

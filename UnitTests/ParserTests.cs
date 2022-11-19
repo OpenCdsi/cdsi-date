@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using OpenCdsi.Date;
+using OpenCdsi.Calendar;
 using System;
 
-namespace OpenCdsi.Date.Tests
+namespace OpenCdsi.Calendar.Tests
 {
     [TestClass]
     public class ParserTests

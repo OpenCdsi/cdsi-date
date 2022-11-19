@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace OpenCdsi.Date
+namespace OpenCdsi.Calendar
 {
     public readonly partial struct CalendarUnit
     {

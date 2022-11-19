@@ -1,11 +1,11 @@
-﻿using OpenCdsi.Date;
+﻿using OpenCdsi.Calendar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenCdsi.Date.Tests
+namespace OpenCdsi.Calendar.Tests
 {
     internal static class Defaults
     {
