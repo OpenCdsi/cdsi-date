@@ -20,7 +20,7 @@ namespace OpenCdsi.Calendar
             }
             else
             {
-                throw new ArgumentException(text);
+                throw new FormatException($"Invalid interval format: {text}");
             }
         }
 
@@ -44,7 +44,7 @@ namespace OpenCdsi.Calendar
                 result = Parse(text);
                 return true;
             }
-            catch (ArgumentException)
+            catch (FormatException)
             {
                 result = Empty;
                 return false;

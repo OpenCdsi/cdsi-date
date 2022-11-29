@@ -1,4 +1,7 @@
-﻿namespace OpenCdsi.Calendar
+﻿using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
+
+namespace OpenCdsi.Calendar
 {
     public static class DateTimeExtensions
     {
@@ -58,6 +61,17 @@
                 date += component;
             }
             return date;
+        }
+
+        public static DateTime Add(this DateTime date, Interval intervals)
+        {
+            return date.Add(intervals.Components);
+        }
+
+        public static DateTime Add(this DateTime date, string text)
+        {
+            var interval = Interval.Parse(text);
+            return date.Add(interval);
         }
     }
 }

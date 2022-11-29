@@ -34,7 +34,7 @@
                 result = Parse(text);
                 return true;
             }
-            catch (ArgumentException)
+            catch (FormatException)
             {
                 result = Empty;
                 return false;

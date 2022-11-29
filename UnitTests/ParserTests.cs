@@ -63,7 +63,7 @@ namespace OpenCdsi.Calendar.Tests
         public void ParseManyNullStringIsEmpty()
         {
             var text = "";
-            Assert.ThrowsException<ArgumentException>(() => CalendarUnit.Parse(text));
+            Assert.ThrowsException<FormatException>(() => CalendarUnit.Parse(text));
         }
     }
 }
