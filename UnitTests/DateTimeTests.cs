@@ -43,5 +43,19 @@ namespace UnitTests
             var result = DateTime.MaxValue.Clamp();
             Assert.AreEqual(new DateTime(2999, 12, 31), result);
         }
+
+        [TestMethod]
+        public void TrapExceptionFromNull()
+        {
+            var result = DateTime.Now.Add(null, Date.MaxValue);
+            Assert.AreEqual(Date.MaxValue, result);
+        }
+
+        [TestMethod]
+        public void TrapExceptionFromEmpty()
+        {
+            var result = DateTime.Now.Add("", Date.MaxValue);
+            Assert.AreEqual(Date.MaxValue, result);
+        }
     }
 }

@@ -73,5 +73,17 @@ namespace OpenCdsi.Calendar
             var interval = Interval.Parse(text);
             return date.Add(interval);
         }
+
+        public static DateTime Add(this DateTime date, string text, DateTime defaultValue)
+        {
+            try
+            {
+                return date.Add(text);
+            }
+            catch (Exception)
+            {
+                return defaultValue;
+            }
+        }
     }
 }
