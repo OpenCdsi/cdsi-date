@@ -65,6 +65,22 @@ namespace OpenCdsi.Calendar.Tests
             var text = "";
             Assert.ThrowsException<FormatException>(() => CalendarUnit.Parse(text));
         }
+
+        [TestMethod]
+        public void ParseDateOfBirthString()
+        {
+            var str = "3/3/1942"; // i love you mom
+            var sut = Date.Parse(str);
+            Assert.AreEqual(DateTime.Parse(str), sut);
+        }
+
+        [TestMethod]
+        public void ParseConditionalSkipDateString()
+        {
+            var str = "19420303";
+            var sut = Date.Parse(str);
+            Assert.AreEqual(DateTime.Parse("3/3/1942"), sut);
+        }
     }
 }
 
